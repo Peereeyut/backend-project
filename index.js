@@ -70,7 +70,9 @@ server.listen(port, function check(error) {
 
   }
 });
-
+server.get('/', (req, res) => {
+  res.send('Hello World!');
+}); 
 //Create the Records
 server.get("/api/recallid/:title", (req, res) => {
   var title = req.params.title.substring(1)
