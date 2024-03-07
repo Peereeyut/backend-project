@@ -3,6 +3,17 @@ const mysql = require("mysql2");
 const router = express.Router()
 require('dotenv').config();
 const db = mysql.createConnection(process.env.DATABASE_URL)
+router.get("/inviteadvisorall", (req, res) => {
+    // var id = req.params.idadvisor.substring(1)
+    var sql = `SELECT * FROM inviteadvisor`;
+    db.query(sql, function (error, result) {
+        if (error) {
+            console.log("Error Connecting Get Invite ADV profile",error);
+        } else {
+            res.send({ status: true, data: result });
+        }
+    });
+});
 // ___________________________________________________________# Get ADV #_______________________________________________________________
 router.get("/advisor/:idadvisor", (req, res) => {
     var id = req.params.idadvisor.substring(1)
