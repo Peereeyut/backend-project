@@ -5,7 +5,7 @@ require('dotenv').config();
 const db = mysql.createConnection(process.env.DATABASE_URL)
 router.get("/inviteadvisorall", (req, res) => {
     // var id = req.params.idadvisor.substring(1)
-    var sql = `SELECT * FROM project INNER JOIN inviteadvisor ON project.idProject = inviteadvisor.Project_idProject`;
+    var sql = `SELECT * FROM project INNER JOIN inviteadvisor ON project.idProject = inviteadvisor.Project_idProject INNER JOIN advisor ON advisor.idadviso=inviteadvisor.advisor_idadvisor`;
     db.query(sql, function (error, result) {
         if (error) {
             console.log("Error Connecting Get Invite ADV profile",error);
