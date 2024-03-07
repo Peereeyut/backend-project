@@ -144,7 +144,7 @@ router.get("/project/:idstudent", (req, res) => {
         if (error) {
             console.log("Error Connecting to DB st4",error);
         } else {
-            res.send({ status: true, data: result, sql });
+            res.send({ status: true, data: result});
         }
     });
 });
