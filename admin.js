@@ -91,7 +91,7 @@ router.post("/backend/updateteacherphone", (req, res) => {
   let sql = `INSERT INTO advisor_phone (phone,advisor_idadvisor) VALUES ('${req.body.phone}', '${req.body.idadvisor}');`;
   db.query(sql, (error, result) => {
     if (error) {
-      res.send({ status: false, message: "Project created Failed /api/project/add", error, sql });
+      res.send({ status: false, message: "Project created Failed /api/project/add", error});
     } else {
       res.send({ status: true, message: "Advisor created successfully" });
     }
@@ -102,7 +102,7 @@ router.post("/backend/updateteacheremail", (req, res) => {
   let sql = `INSERT INTO advisor_email (email,advisor_idadvisor) VALUES ('${req.body.email}', '${req.body.idadvisor}');`;
   db.query(sql, (error, result) => {
     if (error) {
-      res.send({ status: false, message: "Project created Failed /api/project/add", error, sql });
+      res.send({ status: false, message: "Project created Failed /api/project/add", error });
     } else {
       res.send({ status: true, message: "Advisor created successfully" });
     }
