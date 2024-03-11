@@ -159,7 +159,7 @@ router.delete("/projectdel/:idProject", (req, res) => {
     JOIN project_team ON abstract.Project_idProject = project_team.Project_idProject
     JOIN project_keyword ON  project_team.Project_idProject= project_keyword.Project_idProject
     JOIN project_advisor ON project_keyword.Project_idProject = project_advisor.Project_idProject
-    WHERE Project_idProject=${idProject}`;
+    WHERE abstract.Project_idProject=${idProject}`;
     let query = db.query(sql, (error) => {
         if (error) {
             res.send({ status: false, message: "Projcet Deleted Failed",error });
