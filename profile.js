@@ -162,7 +162,7 @@ router.delete("/projectdel/:idProject", (req, res) => {
     WHERE Project_idProject=${idProject}`;
     let query = db.query(sql, (error) => {
         if (error) {
-            res.send({ status: false, message: "Projcet Deleted Failed" });
+            res.send({ status: false, message: "Projcet Deleted Failed",error });
         } else {
             res.send({ status: true, message: "project Deleted successfully" });
         }
