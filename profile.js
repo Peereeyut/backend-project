@@ -148,4 +148,24 @@ router.get("/project/:idstudent", (req, res) => {
         }
     });
 });
+
+router.delete("/projectdel/:idProject", (req, res) => {
+
+    var idProject = req.params.idProject.substring(1); // อ่านค่า parameters ทั้งหมดจาก URL
+    
+
+    let sql = `DDELETE FROM abstract, project_keyword, project_advisor, project_team
+    USING abstract
+    JOIN project_team ON abstract.Project_idProject = project_team.Project_idProject
+    JOIN project_keyword ON  project_team.Project_idProject= project_keyword.Project_idProject
+    JOIN project_advisor ON project_keyword.Project_idProject = project_advisor.Project_idProject
+    WHERE Project_idProject=${idProject}`;
+    let query = db.query(sql, (error) => {
+        if (error) {
+            res.send({ status: false, message: "Projcet Deleted Failed" });
+        } else {
+            res.send({ status: true, message: "project Deleted successfully" });
+        }
+    });
+});
 module.exports = router;
