@@ -180,6 +180,21 @@ server.get("/api/studentproject/:idProject", (req, res) => {
   });
 });
 
+server.get("/api/advisorproject/:idProject", (req, res) => {
+  var idproject = req.params.idProject.substring(1)
+  var sql = `SELECT *
+  FROM project_advisor
+  INNER JOIN advisor ON project_advisor.Advisor_idAdvisor = advisor.idadvisor
+  WHERE project_advisor.Project_idProject = ${idproject}`;
+  db.query(sql, function (error, result) {
+    if (error) {
+      console.log("Error Connecting to DB /api/student");
+    } else {
+      res.send({ status: true, data: result });
+    }
+  });
+});
+
 server.get("/api/user/:email", (req, res) => {
   var email = req.params.email.substring(1)
   var sql = `SELECT user.iduser, user.name, user.email, user.role_idrole, role.name_role FROM user INNER JOIN role ON user.role_idrole = role.idrole WHERE email= "${email}" `;
