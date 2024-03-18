@@ -142,13 +142,21 @@ router.post("/advisor_phone/add", (req, res) => {
 
 router.get("/chartadvisor/:idadvisor", (req, res) => {
     var id = req.params.idadvisor.substring(1)
-    var sql = `SELECT project.idProject, keyword.keyword, COUNT(keyword.keyword) AS freq
+    var origi = `SELECT project.idProject, keyword.keyword, COUNT(keyword.keyword) AS freq
     FROM project
     INNER JOIN project_keyword ON project_keyword.Project_idProject = project.idProject
     INNER JOIN keyword ON keyword.idkeyword = project_keyword.keyword_idkeyword
     INNER JOIN project_advisor ON project.idProject = project_advisor.Project_idProject
     WHERE project_advisor.Advisor_idAdvisor = ${id}
-    // GROUP BY project.idProject,keyword.keyword
+    GROUP BY project.idProject,keyword.keyword
+    ORDER BY freq DESC, keyword.keyword 
+    LIMIT 5;`;
+    var sql = `SELECT  keyword.keyword, COUNT(keyword.keyword) AS freq
+    FROM project
+    INNER JOIN project_keyword ON project_keyword.Project_idProject = project.idProject
+    INNER JOIN keyword ON keyword.idkeyword = project_keyword.keyword_idkeyword
+    INNER JOIN project_advisor ON project.idProject = project_advisor.Project_idProject
+    WHERE project_advisor.Advisor_idAdvisor = ${id}
     GROUP BY keyword.keyword
     ORDER BY freq DESC, keyword.keyword 
     LIMIT 5;`;
