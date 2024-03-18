@@ -148,7 +148,8 @@ router.get("/chartadvisor/:idadvisor", (req, res) => {
     INNER JOIN keyword ON keyword.idkeyword = project_keyword.keyword_idkeyword
     INNER JOIN project_advisor ON project.idProject = project_advisor.Project_idProject
     WHERE project_advisor.Advisor_idAdvisor = ${id}
-    GROUP BY project.idProject,keyword.keyword
+    // GROUP BY project.idProject,keyword.keyword
+    GROUP BY keyword.keyword
     ORDER BY freq DESC, keyword.keyword 
     LIMIT 5;`;
     db.query(sql, function (error, result) {
