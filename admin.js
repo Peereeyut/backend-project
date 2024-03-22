@@ -8,7 +8,7 @@ const db = mysql.createConnection(process.env.DATABASE_URL)
 
 
 // localhost:9002/api/backend/{{path}}
-server.get("", (req, res) => {
+router.get("", (req, res) => {
   var id = req.params.id.substring(1)
   // var sql = 'SELECT * FROM project WHERE en_title= "aaaaaaaa"';
   var cmd = `SELECT * FROM project  `
@@ -222,6 +222,32 @@ router.get("/backend/User", (req, res) => {
       console.log("Error Connecting to DB /backend/User");
     } else {
       res.send({ status: true, data: result });
+    }
+  });
+});
+
+
+////////////////////////////////////////
+router.get("/backend/major", (req, res) => {
+  // var id = req.params.id.substring(1)
+  var cmd = `SELECT * FROM major `
+  // console.log(cmd);
+  db.query(cmd, function (error, result) {
+    if (error) {
+      console.log("Error Connecting to DB");
+    } else {
+      res.send({ status: true, data: result });
+    }
+  });
+});
+
+router.post("/backend/major/add", (req, res) => {
+  let sql = `INSERT INTO major (major_name,editedby, editedby_time) VALUES ('${req.body.major_name}', '${req.body.editedby}', '${req.body.editedby_time}');`;
+  db.query(sql, (error, result) => {
+    if (error) {
+      res.send({ status: false, message: "Project created Failed /api/project/add", error });
+    } else {
+      res.send({ status: true, message: "Advisor created successfully" });
     }
   });
 });
