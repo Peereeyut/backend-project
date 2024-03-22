@@ -52,4 +52,41 @@ router.get("/multiline", (req, res) => {
     });
 });
 
+router.get("/keyword", (req, res) => {
+    var sql = `SELECT COUNT(keyword.keyword) as freq, keyword .keyword
+    FROM project
+    INNER JOIN project_keyword ON project.idProject = project_keyword.Project_idProject 
+    INNER JOIN keyword ON project_keyword.keyword_idkeyword = keyword.idkeyword
+    GROUP BY keyword.keyword
+    ORDER BY freq DESC, keyword.keyword
+    LIMIT 50;
+    `;
+    db.query(sql, function (error, result) {
+        if (error) {
+            console.log("Error Connecting to DB /multiline", error);
+        } else {
+            res.send({ status: true, data: result });
+        }
+    });
+});
+
+router.get("/keyword/:namecate", (req, res) => {
+    var namecate = req.params.namecate.substring(1)
+    var sql = `SELECT project.category ,COUNT(keyword.keyword) as freq, keyword .keyword
+    FROM project
+    INNER JOIN project_keyword ON project.idProject = project_keyword.Project_idProject 
+    INNER JOIN keyword ON project_keyword.keyword_idkeyword = keyword.idkeyword
+    WHERE project.category ="${namecate}"
+    GROUP BY project.category ,keyword.keyword
+    ORDER BY freq DESC, keyword.keyword
+    LIMIT 50
+    `;
+    db.query(sql, function (error, result) {
+        if (error) {
+            console.log("Error Connecting to DB /multiline", error);
+        } else {
+            res.send({ status: true, data: result });
+        }
+    });
+});
 module.exports = router;
