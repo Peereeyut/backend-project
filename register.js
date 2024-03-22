@@ -13,7 +13,7 @@ router.post("/student/add", (req, res) => {
         th_last_name: req.body.th_last_name,
     };
     let sql = "INSERT INTO student SET ?";
-    db.query(sql, details, (error) => {
+    db.query(sql, details, (error, result) => {
         if (error) {
             res.send({ status: false, message: "Project created Failed /api/student/add" });
         } else {
@@ -30,7 +30,7 @@ router.post("/user/add", (req, res) => {
         role_idrole: req.body.role_idrole,
     };
     let sql = "INSERT INTO user SET ?";
-    db.query(sql, details, (error) => {
+    db.query(sql, details, (error, result) => {
         if (error) {
             res.send({ status: false, message: "Project created Failed /api/user/add" });
         } else {
@@ -63,7 +63,7 @@ router.post("/student_phone/add", (req, res) => {
         phone: req.body.phone,
     };
     let sql = "INSERT INTO student_phone SET ?";
-    db.query(sql, details, (error) => {
+    db.query(sql, details, (error, result) => {
         if (error) {
             res.send({ status: false, message: "Project created Failed",error });
         } else {
