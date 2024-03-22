@@ -17,7 +17,7 @@ router.post("/student/add", (req, res) => {
         if (error) {
             res.send({ status: false, message: "Project created Failed /api/student/add" });
         } else {
-            res.send({ status: true, message: "Project created successfully" });
+            res.send({ status: true, message: "Project created successfully", data:result });
         }
     });
 });
@@ -35,7 +35,7 @@ router.post("/user/add", (req, res) => {
             res.send({ status: false, message: "Project created Failed /api/user/add" });
         } else {
 
-            res.send({ status: true, message: "Project created successfully" });
+            res.send({ status: true, message: "Project created successfully", data:result });
         }
     });
 });
@@ -51,7 +51,7 @@ router.post("/student_email/add", (req, res) => {
         if (error) {
             res.send({ status: false, message: "Project created Failed" });
         } else {
-            res.send({ status: true, message: "Project created successfully" });
+            res.send({ status: true, message: "Project created successfully", data:result });
         }
     });
 });
@@ -67,7 +67,7 @@ router.post("/student_phone/add", (req, res) => {
         if (error) {
             res.send({ status: false, message: "Project created Failed",error });
         } else {
-            res.send({ status: true, message: "Project created successfully" });
+            res.send({ status: true, message: "Project created successfully", data:result });
         }
     });
 });
